@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'corsheaders',
+    'Product'
 ]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SITE_ID = 1
@@ -53,9 +54,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.AllowAny',
     ],
-    #    'DEFAULT_FILTER_BACKENDS':[
-    #     'django_filters.rest_framework.DjangoFilterBackend'
-    # ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
@@ -150,7 +148,7 @@ STATICFIES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 MEDIA_URL = ''
-MEDIA_ROOT = os.path.join(BASE_DIR, '/static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/static/image')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
