@@ -11,7 +11,7 @@ function Navbar() {
   console.log(min);
 
   return (
-    <div className='bg-zinc-900 text-white  flex items-center justify-between px-2 '>
+    <div className='bg-zinc-900 text-white  flex items-center justify-between p-2 '>
       <div>
         <ul className='flex gap-5  items-center '>
          <li className="log">
