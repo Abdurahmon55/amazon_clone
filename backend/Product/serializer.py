@@ -1,12 +1,14 @@
 from rest_framework.serializers import ModelSerializer
 from .models import *
 
-class ProductSerializer(ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
+def Serializer(name, models, field):
+    class name(ModelSerializer):
+        class Meta:
+            model=models
+            fields=field
+    return name  
 
-class ImgaSerializer(ModelSerializer):
-    class Meta:
-        model=ProductImage
-        fields='__all__'
+CatigorySerializer=Serializer('CatigorySerializer', Category, '__all__')
+ImgaSerializer=Serializer('ProductImage', ProductImage, '__all__')
+ProductSerializer=Serializer('ProductSerializer', Product, '__all__')
+NewsProductSerializer=Serializer('NewsProductSerializer', NewsProduct, '__all__')

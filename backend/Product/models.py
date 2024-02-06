@@ -21,3 +21,9 @@ class ProductImage(models.Model):
     image=models.ImageField()
     product=models.ForeignKey(Product, on_delete=models.CASCADE)
 
+class NewsProduct(models.Model):
+    image=models.ImageField()
+    name=models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return self.name

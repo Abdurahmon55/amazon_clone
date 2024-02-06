@@ -8,6 +8,14 @@
     box-sizing: border-box;
     text-decoration: none;
 }
-h2{
-    font-size: large;
+
+body{
+    background-color: aliceblue;
+    /* background-color: blue; */
+   
+}
+
+.image{
+    max-width: 100%;
+    mask-image: linear-gradient(to bottom, #000000 50%, transparent 100%);
 }
