@@ -1,42 +1,21 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
-import BookCard from '../components/BookCard'
 import Carousel from '../components/Carousel'
+import MoveCard from '../components/MoveCard'
 import ProductCard from '../components/ProductCard'
+import useCount from '../hooks/useCount'
 import useFetch from '../hooks/useFetch'
-import ping from '../image/XCM_CUTTLE.jpg'
-function Home() {
-  const array = [
-    { id: 1, image: ping },
-    { id: 2, image: ping },
-    { id: 3, image: ping },
-    { id: 4, image: ping },
-    { id: 5, image: ping },
-    { id: 6, image: ping },
-  ]
-  const [next, setNext] = useState(1)
-  const getElement = () => {
-    if (next === array.length - 1) {
-      setNext(1)
-    }
-    else {
-      setNext(next + 1)
-    }
-  }
 
-  const prevElement = () => {
-    if (next === 0) {
-      setNext(array.length - 1)
-    }
-    else {
-      setNext(next - 1)
-    }
-  }
+function Home() {
   const [showImage, setShowImage] = useState(1)
-  const { data } = useFetch(`http://127.0.0.1:8000/api/v1/product/news/${showImage}/`)
-  const {data : all}= useFetch('http://127.0.0.1:8000/api/v1/product/news/')
-  const {data:catigory}=useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
-  const {data:book}=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
+
+  // useFetch hook  data
+  const [data ] = useFetch(`http://127.0.0.1:8000/api/v1/product/news/${showImage}/`)
+  const [all]= useFetch('http://127.0.0.1:8000/api/v1/product/news/')
+  const [catigory]=useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
+  const [book]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
+  const [move]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=18')
+
+  // function
   const NextShowImage = () => {
     if (all && all.length > showImage) {
       setShowImage(showImage + 1)
@@ -53,6 +32,11 @@ function Home() {
       setShowImage(showImage-1)
     }
   }
+
+  // Counter hook carusel
+  const [count, nexts, prev]=useCount(move && move.length-2)
+  const [countBook, getElement, prevElement]=useCount(book && book.length-2)
+ 
   return (
     <div className='pr-8'>
       <div>
@@ -80,8 +64,22 @@ function Home() {
               <span className='text-xs pl-4 text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'>all deals</span>
             </h4>
               <div className=' flex gap-2 overflow-hidden'>
-            {book && book.map((item) => (
-              <BookCard key={item.id}{...item} next={next} />
+            {book && book.map((item, index) => (
+              <MoveCard key={item.id}{...item} index={index} count={countBook} />
+            ))}
+          </div>
+          </div>
+        </div>
+        <div className='n relative'>
+          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prev}><ion-icon name="arrow-back"></ion-icon></button>
+          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nexts}><ion-icon name="arrow-forward"></ion-icon></button>
+          <div className='mt-4 p-4  bg-white'>
+            <h4 className='font-bold'>Exciting deals
+              <span className='text-xs pl-4 text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'>all deals</span>
+            </h4>
+              <div className=' flex gap-2 overflow-hidden'>
+            {move && move.map((item, index) => (
+              <MoveCard key={item.id}{...item} index={index} count={count} />
             ))}
           </div>
           </div>

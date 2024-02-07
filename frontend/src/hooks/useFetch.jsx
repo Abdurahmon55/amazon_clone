@@ -8,6 +8,6 @@ useEffect(()=>{
     .then(res=>setData(res.data))
     .catch(err=>console.log(err))
 },[url])
-return {data}
+return [data]
 }
 export default useFetch
