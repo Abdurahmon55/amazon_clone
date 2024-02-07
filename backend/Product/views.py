@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .serializer import *
 from .models import *
 from rest_framework.generics import *
+from django_filters.rest_framework import DjangoFilterBackend
 # Create your views here.
 
 def GetObject (name, model, Views, serializer):
@@ -10,7 +11,13 @@ def GetObject (name, model, Views, serializer):
         serializer_class=serializer
     return name    
 
-ProductViews=GetObject('ProductViews', Product, ListAPIView, ProductSerializer)
+class ProductViews(ListAPIView):
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['Category']
+    
+
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 CatigoryViews=GetObject('CatigoryViews', Category, ListAPIView, CatigorySerializer)
 CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, CatigorySerializer)

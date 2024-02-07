@@ -9,12 +9,9 @@ function App() {
     <div>
       <Navbar />
       <MinNav />
-      <div className='co container m-auto'>
           <Routes>
         <Route path="/" element={<Home />} />
-      </Routes>
-      </div>
-    
+      </Routes> 
     </div>
 
 

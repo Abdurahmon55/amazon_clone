@@ -8,6 +8,9 @@ class Category(models.Model):
     name=models.CharField(max_length=100)
     image=models.ImageField()
 
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     name=models.CharField(max_length=100)
     desc=models.TextField(blank=True)
@@ -17,9 +20,12 @@ class Product(models.Model):
     Category=models.ManyToManyField(Category, blank=True)
     user=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='userProfile')
 
+    def __str__(self) :
+        return self.name
+
 class ProductImage(models.Model):
-    image=models.ImageField()
-    product=models.ForeignKey(Product, on_delete=models.CASCADE)
+    images=models.ImageField()
+    product=models.ForeignKey(Product, on_delete=models.CASCADE, related_name='image')
 
 class NewsProduct(models.Model):
     image=models.ImageField()

@@ -10,5 +10,11 @@ def Serializer(name, models, field):
 
 CatigorySerializer=Serializer('CatigorySerializer', Category, '__all__')
 ImgaSerializer=Serializer('ProductImage', ProductImage, '__all__')
-ProductSerializer=Serializer('ProductSerializer', Product, '__all__')
+# ProductSerializer=Serializer('ProductSerializer', Product, '__all__')
 NewsProductSerializer=Serializer('NewsProductSerializer', NewsProduct, '__all__')
+
+class ProductSerializer(ModelSerializer):
+    image=ImgaSerializer(many=True, read_only = True)
+    class Meta:
+        model=Product
+        fields='__all__'

@@ -35,6 +35,8 @@ function Home() {
   const [showImage, setShowImage] = useState(1)
   const { data } = useFetch(`http://127.0.0.1:8000/api/v1/product/news/${showImage}/`)
   const {data : all}= useFetch('http://127.0.0.1:8000/api/v1/product/news/')
+  const {data:catigory}=useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
+  const {data:book}=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
   const NextShowImage = () => {
     if (all && all.length > showImage) {
       setShowImage(showImage + 1)
@@ -62,6 +64,27 @@ function Home() {
           <ul className='carusel h-[50%] relative flex overflow-hidden'>
             {data ? <Carousel image={data}/>:'loading'}
           </ul>
+        </div>
+      </div>
+      <div className='lg:top-[-200px] relative p-8 top-[-90px] sm:top-[-120px]'>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 '>
+          {catigory && catigory.slice(1,9).map((item)=>(
+            <ProductCard key={item.id}{...item}/>
+          ))}
+        </div>
+        <div className='n relative'>
+          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevElement}><ion-icon name="arrow-back"></ion-icon></button>
+          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={getElement}><ion-icon name="arrow-forward"></ion-icon></button>
+          <div className='mt-4 p-4  bg-white'>
+            <h4 className='font-bold'>Exciting deals
+              <span className='text-xs pl-4 text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'>all deals</span>
+            </h4>
+              <div className=' flex gap-2 overflow-hidden'>
+            {book && book.map((item) => (
+              <BookCard key={item.id}{...item} next={next} />
+            ))}
+          </div>
+          </div>
         </div>
       </div>
     </div>
