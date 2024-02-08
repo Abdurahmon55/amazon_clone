@@ -4,16 +4,18 @@ import Navbar from './components/Navbar'
 import Home from './page/Home'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/footer/Footer'
+import Results from './page/Results'
 
 function App() {
   return (
     <div>
       <Navbar />
       <MinNav />
-          <Routes>
+      <Routes>
         <Route path="/" element={<Home />} />
-      </Routes> 
-      <Footer/>
+        <Route path='Category/:id' element={<Results/>}/>
+      </Routes>
+      <Footer />
     </div>
 
 

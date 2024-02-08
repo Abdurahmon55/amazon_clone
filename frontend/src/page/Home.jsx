@@ -43,6 +43,7 @@ function Home() {
   const [musics, nextMusic, prevMusic]=useCount(music && music.length-2)
 
   console.log(catigory);
+  console.log(all);
   return (
     <div className='pr-8'>
       <div>
@@ -57,7 +58,7 @@ function Home() {
         </div>
       </div>
       <div className='lg:top-[-200px] relative p-8 top-[-90px] sm:top-[-120px]'>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 '>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2  grid-cols-1'>
           {catigory && catigory.slice(1,9).map((item)=>(
             <ProductCard key={item.id}{...item}/>
           ))}
@@ -88,7 +89,7 @@ function Home() {
           </div>
           </div>
         </div>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 mt-4  '>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2 grid-cols-1 mt-4  '>
           {catigory && catigory.slice(9,13).map((item)=>(
             <ProductCard key={item.id}{...item}/>
           ))}
@@ -117,7 +118,7 @@ function Home() {
           </div>
           </div>
         </div>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 mt-4  '>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2 grid-cols-1 mt-4  '>
           {catigory && catigory.slice(15,19).map((item)=>(
             <ProductCard key={item.id}{...item}/>
           ))}

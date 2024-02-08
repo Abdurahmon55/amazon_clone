@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import FooterCart from './FooterCart'
 import { AmazonPaymentProducts, GettoKnowUs, LetUsHelpYou, MakeMoneywithUs } from './footerData'
 
@@ -13,7 +13,7 @@ function Footer() {
             <span className='text-sm'>New customer? <span className='text-sm  text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'> Start here.</span></span>
         </div>
         <div className='bg-gray-800 hover:bg-gray-700 cursor-pointer'>
-            <a href='/' className='text-white flex justify-center p-4'>Back to top</a>
+            <Link to='/' className='text-white flex justify-center p-4'>Back to top</Link>
         </div>
         <div className='bg-gray-900 pt-10 pl-4 pb-4 grid lg:grid-cols-4 grid-cols-2 gap-8'>
             <ul className='flex flex-col gap-2'>
