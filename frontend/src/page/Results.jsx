@@ -13,7 +13,7 @@ function Results() {
             <div className="sidebar ">
                 <Sidebar />
             </div>
-            <div className="Results col-span-2 ">
+            <div className="Results col-span-2 max-h-[1200px] overflow-y-scroll">
                 <h2 className='font-bold'>Results</h2>
                 <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
                     {catigory && catigory.map((item) => (

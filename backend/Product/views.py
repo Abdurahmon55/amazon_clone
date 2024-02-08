@@ -19,6 +19,7 @@ class ProductViews(ListAPIView):
     
 
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
+ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)
 CatigoryViews=GetObject('CatigoryViews', Category, ListAPIView, CatigorySerializer)
 CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, CatigorySerializer)
 NewsProductViews=GetObject('NewsProductViews', NewsProduct, RetrieveAPIView, NewsProductSerializer)

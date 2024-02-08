@@ -5,6 +5,7 @@ import Home from './page/Home'
 import { Route, Routes } from 'react-router-dom'
 import Footer from './components/footer/Footer'
 import Results from './page/Results'
+import PageCard from './page/PageCard'
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='Category/:id' element={<Results/>}/>
+        <Route path='Praduct/:id' element={<PageCard/>}/>
+        <Route path='Category/:id/Praduct/:id' element={<PageCard/>}/>
       </Routes>
       <Footer />
     </div>

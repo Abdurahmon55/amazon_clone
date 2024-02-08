@@ -18,6 +18,7 @@ class Product(models.Model):
     stock=models.PositiveIntegerField()
     data=models.DateTimeField(auto_now_add=True)
     brand=models.CharField(max_length=100, blank=True)
+    star=models.PositiveIntegerField(blank=True)
     Category=models.ManyToManyField(Category, blank=True)
     user=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='userProfile')
 

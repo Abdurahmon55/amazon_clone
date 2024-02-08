@@ -42,8 +42,7 @@ function Home() {
   const [bestBook, nextBook, prevBook]=useCount(bestSellerBook && bestSellerBook.length-2)
   const [musics, nextMusic, prevMusic]=useCount(music && music.length-2)
 
-  console.log(catigory);
-  console.log(all);
+  console.log(book);
   return (
     <div className='pr-8'>
       <div>
