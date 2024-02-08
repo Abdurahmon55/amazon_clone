@@ -17,6 +17,7 @@ class Product(models.Model):
     price=models.DecimalField(max_digits=10, decimal_places=2) 
     stock=models.PositiveIntegerField()
     data=models.DateTimeField(auto_now_add=True)
+    brand=models.CharField(max_length=100, blank=True)
     Category=models.ManyToManyField(Category, blank=True)
     user=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='userProfile')
 

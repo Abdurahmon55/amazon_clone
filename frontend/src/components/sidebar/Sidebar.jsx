@@ -1,6 +1,5 @@
 import React from 'react'
 import { Brands, CustomerReviews, Price } from './filterData'
-import SidebarCard from './SidebarCard'
 
 function Sidebar() {
   return (
