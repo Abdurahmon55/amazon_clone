@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BookCard from '../components/BookCard'
 import Carousel from '../components/Carousel'
 import MoveCard from '../components/MoveCard'
 import ProductCard from '../components/ProductCard'
@@ -14,6 +15,8 @@ function Home() {
   const [catigory]=useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
   const [book]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
   const [move]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=18')
+  const [bestSellerBook]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=22')
+  const [music]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=11')
 
   // function
   const NextShowImage = () => {
@@ -36,7 +39,10 @@ function Home() {
   // Counter hook carusel
   const [count, nexts, prev]=useCount(move && move.length-2)
   const [countBook, getElement, prevElement]=useCount(book && book.length-2)
- 
+  const [bestBook, nextBook, prevBook]=useCount(bestSellerBook && bestSellerBook.length-2)
+  const [musics, nextMusic, prevMusic]=useCount(music && music.length-2)
+
+  console.log(catigory);
   return (
     <div className='pr-8'>
       <div>
@@ -65,7 +71,7 @@ function Home() {
             </h4>
               <div className=' flex gap-2 overflow-hidden'>
             {book && book.map((item, index) => (
-              <MoveCard key={item.id}{...item} index={index} count={countBook} />
+              <BookCard key={item.id}{...item} index={index} count={countBook} />
             ))}
           </div>
           </div>
@@ -74,15 +80,47 @@ function Home() {
           <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prev}><ion-icon name="arrow-back"></ion-icon></button>
           <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nexts}><ion-icon name="arrow-forward"></ion-icon></button>
           <div className='mt-4 p-4  bg-white'>
-            <h4 className='font-bold'>Exciting deals
-              <span className='text-xs pl-4 text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'>all deals</span>
-            </h4>
+            <h4 className='font-bold'>Most wished for in Movies & TV</h4>
               <div className=' flex gap-2 overflow-hidden'>
             {move && move.map((item, index) => (
               <MoveCard key={item.id}{...item} index={index} count={count} />
             ))}
           </div>
           </div>
+        </div>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 mt-4  '>
+          {catigory && catigory.slice(9,13).map((item)=>(
+            <ProductCard key={item.id}{...item}/>
+          ))}
+        </div>
+        <div className='n relative'>
+          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevBook}><ion-icon name="arrow-back"></ion-icon></button>
+          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nextBook}><ion-icon name="arrow-forward"></ion-icon></button>
+          <div className='mt-4 p-4  bg-white'>
+            <h4 className='font-bold'>Top Sellers in Books for you</h4>
+              <div className=' flex gap-2 overflow-hidden'>
+            {bestSellerBook && bestSellerBook.map((item, index) => (
+              <MoveCard key={item.id}{...item} index={index} count={bestBook} />
+            ))}
+          </div>
+          </div>
+        </div>
+        <div className='n relative'>
+          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevMusic}><ion-icon name="arrow-back"></ion-icon></button>
+          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nextMusic}><ion-icon name="arrow-forward"></ion-icon></button>
+          <div className='mt-4 p-4  bg-white'>
+            <h4 className='font-bold'>Top Sellers in Books for you</h4>
+              <div className=' flex gap-2 overflow-hidden'>
+            {music && music.map((item, index) => (
+              <MoveCard key={item.id}{...item} index={index} count={musics} />
+            ))}
+          </div>
+          </div>
+        </div>
+        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  grid-cols-2 mt-4  '>
+          {catigory && catigory.slice(15,19).map((item)=>(
+            <ProductCard key={item.id}{...item}/>
+          ))}
         </div>
       </div>
     </div>
