@@ -1,18 +1,37 @@
+import axios from 'axios'
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import logo from '../image/pngimg.png'
+import { getAuth, selectAuth } from '../redux/authSlice'
 
 function Navbar() {
   const [min, setMin] = useState(false)
+  const auth = useSelector(selectAuth)
+  const dispatch = useDispatch()
 
   const humburger = () => {
     setMin(!min)
 
   }
+  const [data, setData] = useState()
+  const getUser = () => {
+    axios.get('http://127.0.0.1:8000/api/v1/auth/user/')
+      .then(res => setData(res.data))
+      .catch(err => console.log(err))
+    console.log(data && data);
+  }
+  useEffect(()=>{
+    const data = JSON.parse(localStorage.getItem('user'))
+    dispatch(getAuth(data))
+  },[])
+  console.log(auth.username);
+  
 
   return (
-    <div className='b bg-slate-900 text-white  flex items-center justify-between px-2'>
+    <div className=' bg-slate-900 text-white  flex items-center justify-between px-2'>
       <div>
         <ul className='flex gap-5  items-center '>
           <li className="log">
@@ -21,7 +40,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="state sm:block hidden">
-            <span className='sm:text-xs md:font-thin'>Deliver to</span>
+            <span onClick={getUser} className='sm:text-xs md:font-thin cursor-pointer'>Deliver to</span>
             <li className='pr-2'>
               <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'> <i className='text-xs'><ion-icon name="compass"></ion-icon></i> Uzbekistan</h6>
             </li>
@@ -43,8 +62,13 @@ function Navbar() {
             <ion-icon name="arrow-dropdown"></ion-icon>
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg'>
-            <span className='sm:text-xs sm:font-thin'>Hello, sing in</span>
-            <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
+           {!auth ?  <Link to='Login/'>
+              <span to='Register/' className='sm:text-xs sm:font-thin'>Hello, sing in</span>
+              <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
+            </Link>: <Link to='Login/'>
+              <span  className='sm:text-xs sm:font-thin'>{auth.username}</span>
+              <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
+            </Link> }
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg'>
             <span className='sm:text-xs sm:font-thin'>Returns</span>

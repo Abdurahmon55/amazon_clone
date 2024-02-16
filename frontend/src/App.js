@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Footer from './components/footer/Footer'
 import Results from './page/Results'
 import PageCard from './page/PageCard'
+import Login from './page/Login'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='Category/:id' element={<Results/>}/>
         <Route path='Praduct/:id' element={<PageCard/>}/>
         <Route path='Category/:id/Praduct/:id' element={<PageCard/>}/>
+        <Route path='Login/' element={<Login/>}/>
       </Routes>
       <Footer />
     </div>

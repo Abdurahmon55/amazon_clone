@@ -20,7 +20,7 @@ class Product(models.Model):
     brand=models.CharField(max_length=100, blank=True)
     star=models.PositiveIntegerField(blank=True)
     Category=models.ManyToManyField(Category, blank=True)
-    user=models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='userProfile')
+    user=models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self) :
         return self.name

@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import BookCard from '../components/BookCard'
 import Carousel from '../components/Carousel'
 import MoveCard from '../components/MoveCard'
 import ProductCard from '../components/ProductCard'
 import useCount from '../hooks/useCount'
 import useFetch from '../hooks/useFetch'
+import { selectAuth } from '../redux/authSlice'
 
 function Home() {
   const [showImage, setShowImage] = useState(1)
@@ -42,7 +44,6 @@ function Home() {
   const [bestBook, nextBook, prevBook]=useCount(bestSellerBook && bestSellerBook.length-2)
   const [musics, nextMusic, prevMusic]=useCount(music && music.length-2)
 
-  console.log(book);
   return (
     <div className='pr-8'>
       <div>
@@ -123,6 +124,11 @@ function Home() {
           ))}
         </div>
       </div>
+      {/* <div className='flex flex-col items-center border-t-2 border-b-2 mb-10 absolute top-[-130px] p-5 w-full'>
+            <span className='text-sm'>See personalized recommendations</span>
+            <Link to='Register/' className='text-center bg-amber-400 w-52 rounded-md shadow-md border-2 border-amber-300 cursor-pointer font-bold'>Sign in</Link>
+            <span className='text-sm'>New customer? <span className='text-sm  text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'> Start here.</span></span>
+        </div> */}
     </div>
   )
 }

@@ -25,3 +25,4 @@ CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, Ca
 NewsProductViews=GetObject('NewsProductViews', NewsProduct, RetrieveAPIView, NewsProductSerializer)
 NewsProductFullViews=GetObject('NewsProductViews', NewsProduct, ListAPIView, NewsProductSerializer)
 
+

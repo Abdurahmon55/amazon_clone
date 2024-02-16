@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 function MinNav() {
   return (
@@ -11,7 +10,6 @@ function MinNav() {
             </li>
             <li className='hover:border rounded-sm px-2   cursor-pointer md:text-base text-xs'>
                 <span>Today's Deals</span>
-                <Link to='new/'></Link>
             </li>
             <li className='hover:border rounded-sm px-2  cursor-pointer md:text-base text-xs'>
                 <span>Custeimer Service</span>
