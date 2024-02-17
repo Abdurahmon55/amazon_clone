@@ -1,13 +1,19 @@
+import axios from 'axios'
 import React from 'react'
+import { useSelector } from 'react-redux'
 import Shop from '../components/Shop'
-import useCount from '../hooks/useCount'
 import useFetch from '../hooks/useFetch'
-import useScore from '../hooks/useScore'
+import { selectAuth } from '../redux/authSlice'
 
 function ShopCard() {
     const [card] = useFetch(`http://127.0.0.1:8000/api/v1/product/views/2/`)
     const [book] = useFetch('http://127.0.0.1:8000/api/v1/product/catigory/17/')
     const [books]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
+    const auth = useSelector(selectAuth)
+    const addCard=async(id)=>{
+        const getShoper = await axios.get(`http://127.0.0.1:8000/api/v1/user/?username=${auth.username}`)
+        const shoperId = await getShoper.data[0].id
+    }
     return (
         <div className='p-4'>
             <div className='grid grid-cols-3 lg:grid-cols-5 gap-4'>
@@ -39,7 +45,7 @@ function ShopCard() {
                                     <p className='text-xs text-slate-400'>Llenajn Paperback</p>
                                     <span className='text-red-500'>${item.price}</span>
                                     <br />
-                                    <button className='px-2 text-xs hover:bg-amber-300 bg-amber-400 text-center rounded-md'>add to Card</button>
+                                    <button onClick={()=>addCard(item.id)} className='px-2 text-xs hover:bg-amber-300 bg-amber-400 text-center rounded-md'>add to Card</button>
                                 </div>
                             </div>
                         ))}
