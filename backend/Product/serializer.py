@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import *
+from django.contrib.auth.models import User
 
 def Serializer(name, models, field):
     class name(ModelSerializer):
@@ -11,9 +12,10 @@ def Serializer(name, models, field):
 CatigorySerializer=Serializer('CatigorySerializer', Category, '__all__')
 ImgaSerializer=Serializer('ProductImage', ProductImage, '__all__')
 NewsProductSerializer=Serializer('NewsProductSerializer', NewsProduct, '__all__')
-
+UserSerializer=Serializer('UserSerializer', User, '__all__')
 class ProductSerializer(ModelSerializer):
     image=ImgaSerializer(many=True, read_only = True)
     class Meta:
         model=Product
         fields='__all__'
+
