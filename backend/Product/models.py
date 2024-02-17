@@ -35,3 +35,8 @@ class NewsProduct(models.Model):
 
     def __str__(self):
         return self.name
+
+class Shoper(models.Model):
+    shoper=models.ForeignKey(User, on_delete=models.CASCADE)
+    product=models.ForeignKey(Product, on_delete=models.CASCADE)
+    number=models.IntegerField(blank=True)
