@@ -11,7 +11,7 @@ def Serializer(name, models, field):
 CatigorySerializer=Serializer('CatigorySerializer', Category, '__all__')
 ImgaSerializer=Serializer('ProductImage', ProductImage, '__all__')
 NewsProductSerializer=Serializer('NewsProductSerializer', NewsProduct, '__all__')
-
+ShoperSerializer=Serializer('ShoperSerializer', Shoper, '__all__')
 class ProductSerializer(ModelSerializer):
     image=ImgaSerializer(many=True, read_only = True)
     class Meta:

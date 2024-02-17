@@ -24,5 +24,7 @@ CatigoryViews=GetObject('CatigoryViews', Category, ListAPIView, CatigorySerializ
 CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, CatigorySerializer)
 NewsProductViews=GetObject('NewsProductViews', NewsProduct, RetrieveAPIView, NewsProductSerializer)
 NewsProductFullViews=GetObject('NewsProductViews', NewsProduct, ListAPIView, NewsProductSerializer)
+ShoperViews=GetObject('ShoperViews', Shoper, ListCreateAPIView, ShoperSerializer)
+ShoperDetalViews=GetObject('ShoperDetalViews', Shoper, RetrieveUpdateDestroyAPIView, ShoperSerializer)
 
 
