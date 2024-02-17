@@ -23,12 +23,11 @@ function Navbar() {
       .catch(err => console.log(err))
     console.log(data && data);
   }
-  useEffect(()=>{
+  useEffect(() => {
     const data = JSON.parse(localStorage.getItem('user'))
     dispatch(getAuth(data))
-  },[])
-  console.log(auth.username);
-  
+  }, [])
+
 
   return (
     <div className=' bg-slate-900 text-white  flex items-center justify-between px-2'>
@@ -62,20 +61,22 @@ function Navbar() {
             <ion-icon name="arrow-dropdown"></ion-icon>
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg'>
-           {!auth ?  <Link to='Login/'>
+            {!auth ? <Link to='Login/'>
               <span to='Register/' className='sm:text-xs sm:font-thin'>Hello, sing in</span>
               <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
-            </Link>: <Link to='Login/'>
-              <span  className='sm:text-xs sm:font-thin'>{auth.username}</span>
+            </Link> : <Link to='Login/'>
+              <span className='sm:text-xs sm:font-thin'>{auth.username}</span>
               <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
-            </Link> }
+            </Link>}
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg'>
             <span className='sm:text-xs sm:font-thin'>Returns</span>
             <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>& Orders</h6>
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg '>
-            <i className='text-3xl hover:text-sky-800'><ion-icon name="cart"></ion-icon></i>
+            <Link to='shopCard/'>
+              <i className='text-3xl hover:text-sky-800'><ion-icon name="cart"></ion-icon></i>
+            </Link>
           </li>
         </ul>
         <button onClick={humburger} className='md:hidden text-3xl hover:text-sky-800 hover:text-4xl'>

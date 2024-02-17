@@ -7,6 +7,7 @@ import Footer from './components/footer/Footer'
 import Results from './page/Results'
 import PageCard from './page/PageCard'
 import Login from './page/Login'
+import ShopCard from './page/ShopCard'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='Praduct/:id' element={<PageCard/>}/>
         <Route path='Category/:id/Praduct/:id' element={<PageCard/>}/>
         <Route path='Login/' element={<Login/>}/>
+        <Route path='shopCard/' element={<ShopCard/>}/>
       </Routes>
       <Footer />
     </div>
