@@ -10,4 +10,5 @@ urlpatterns = [
     path('product/news/', NewsProductFullViews.as_view()),
     path('shoper/', ShoperViews.as_view()),
     path('shoper/<int:pk>', ShoperDetalViews.as_view()),
+    path('profile/', ProfileViews.as_view())
 ]

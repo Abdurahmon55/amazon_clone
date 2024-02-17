@@ -3,6 +3,7 @@ from .serializer import *
 from .models import *
 from rest_framework.generics import *
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib.auth.models import User
 # Create your views here.
 
 def GetObject (name, model, Views, serializer):
@@ -16,7 +17,12 @@ class ProductViews(ListAPIView):
     serializer_class=ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['Category']
-    
+
+class ProfileViews(ListAPIView):
+    queryset=User.objects.all()
+    serializer_class=ProfileSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['username']    
 
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)
