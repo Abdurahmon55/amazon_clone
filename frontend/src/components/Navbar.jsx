@@ -4,27 +4,27 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import useToggol from '../hooks/useToggol'
 import logo from '../image/pngimg.png'
 import { getAuth, selectAuth } from '../redux/authSlice'
 import { selectItem } from '../redux/countSilce'
 
 function Navbar() {
-  const [min, setMin] = useState(false)
+
   const auth = useSelector(selectAuth)
   const item = useSelector(selectItem)
   const dispatch = useDispatch()
 
-  const humburger = () => {
-    setMin(!min)
-
-  }
+  const [toggol, setToggol]=useToggol()
   const [data, setData] = useState()
+
   const getUser = () => {
     axios.get('http://127.0.0.1:8000/api/v1/auth/user/')
       .then(res => setData(res.data))
       .catch(err => console.log(err))
     console.log(data && data);
   }
+
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('user'))
     dispatch(getAuth(data))
@@ -57,7 +57,7 @@ function Navbar() {
         <i className='text-black cursor-pointer sm:text-2xl text-base bg-orange-300 rounded-r-lg sm:p-1'><ion-icon name="search"></ion-icon></i>
       </div>
       <div >
-        <ul className={`info md:gap-5  md:flex md:items-center md:static p-2 rounded-b-lg absolute bg-zinc-900 ${min ? 'right-0 top-10' : 'right-[-200px]'} top-16 z-30`}>
+        <ul className={`info md:gap-5  md:flex md:items-center md:static p-2 rounded-b-lg absolute bg-zinc-900 ${toggol ? 'right-0 top-10' : 'right-[-200px]'} top-16 z-30`}>
           <li className='cursor-pointer flex hover:bg-slate-700 px-1 rounded-lg items-end'>
             <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>EN</h6>
             <ion-icon name="arrow-dropdown"></ion-icon>
@@ -82,8 +82,8 @@ function Navbar() {
             </Link>
           </li>
         </ul>
-        <button onClick={humburger} className='md:hidden text-3xl hover:text-sky-800 hover:text-4xl'>
-          {!min ? <ion-icon name="reorder"></ion-icon> : <ion-icon name="close"></ion-icon>}
+        <button onClick={setToggol} className='md:hidden text-3xl hover:text-sky-800 hover:text-4xl'>
+          {!toggol ? <ion-icon name="reorder"></ion-icon> : <ion-icon name="close"></ion-icon>}
         </button>
 
       </div>

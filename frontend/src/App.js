@@ -8,6 +8,7 @@ import Results from './page/Results'
 import PageCard from './page/PageCard'
 import Login from './page/Login'
 import ShopCard from './page/ShopCard'
+import Modal from './components/Modal'
 
 function App() {
   return (
