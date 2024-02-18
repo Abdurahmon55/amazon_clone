@@ -7,7 +7,6 @@ import useFetch from '../hooks/useFetch'
 function Results() {
     const { id } = useParams()
     const [catigory] = useFetch(`http://127.0.0.1:8000/api/v1/product/views/?Category=${id}`)
-    console.log(catigory);
     return (
         <div className='mb-36 grid grid-cols-3 gap-5 m-4'>
             <div className="sidebar ">

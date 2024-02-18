@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import useAddToCard from '../hooks/useAddToCard'
 import useFetch from '../hooks/useFetch'
 
 function PageCard() {
     const { id } = useParams()
     const [card] = useFetch(`http://127.0.0.1:8000/api/v1/product/views/${id}/`)
     const [imageId, setImageId] = useState(0)
-    console.log(card && card);
+    const [addCard]=useAddToCard()
     return (
         <div className='mb-36 p-4'>
             <div className='grid grid-cols-5'>
@@ -48,7 +49,7 @@ function PageCard() {
                             <span className='text-cyan-500 pl-5 hover:text-red-400 cursor-pointer'><i><ion-icon name="compass"></ion-icon></i>Deliver to Uzbekistan</span>
                             <span className='m-5 border-2 text-center p-2 rounded-lg text-sm font-semibold hover:bg-slate-100 cursor-pointer'>See All Buying Options</span>
                             <div  className='border-b-2 mx-5'></div>
-                            <span className='m-5 border p-2 rounded-lg border-black hover:bg-slate-100 cursor-pointer'>Add to List</span>
+                            <span onClick={()=>addCard(card && card.id)} className='m-5 border p-2 rounded-lg border-black hover:bg-slate-100 cursor-pointer'>Add to List</span>
                         </div>
                     </div>
                     <div className='border-2 mt-4 p-5'>

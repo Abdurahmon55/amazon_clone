@@ -4,7 +4,7 @@ import productImage from '../image/XCM_CUTTLE.jpg'
 function ProductCard({image, name, id}) {
   const naviget = useNavigate()
   const getCatigore=()=>{
-    naviget(`Category/${id}`)
+    naviget(`/Category/${id}`)
   }
   return (
     <div onClick={getCatigore} className=' bg-white p-4 flex flex-col justify-between cursor-pointer '>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function useScore(){
-    const [number, setNumber]=useState(1)
+function useScore(count){
+    const [number, setNumber]=useState(count ? count : 1)
 
     const addNumber=()=>{
         setNumber(number+1)

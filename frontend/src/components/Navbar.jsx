@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../image/pngimg.png'
 import { getAuth, selectAuth } from '../redux/authSlice'
+import { selectItem } from '../redux/countSilce'
 
 function Navbar() {
   const [min, setMin] = useState(false)
   const auth = useSelector(selectAuth)
+  const item = useSelector(selectItem)
   const dispatch = useDispatch()
 
   const humburger = () => {
@@ -74,8 +76,9 @@ function Navbar() {
             <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>& Orders</h6>
           </li>
           <li className='cursor-pointer hover:bg-slate-700 px-1 rounded-lg '>
-            <Link to='shopCard/'>
-              <i className='text-3xl hover:text-sky-800'><ion-icon name="cart"></ion-icon></i>
+            <Link className='relative hover:text-blue-800' to='shopCard/'>
+              <i className='text-3xl  opacity-45'><ion-icon name="cart"></ion-icon></i>
+              <span className='text-red-500  absolute left-3 bottom-4 text-2xl'>{item}</span>
             </Link>
           </li>
         </ul>

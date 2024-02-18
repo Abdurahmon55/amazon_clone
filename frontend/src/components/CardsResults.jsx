@@ -6,7 +6,7 @@ function CardsResults({ name, image, price, stock, desc, id }) {
 
   const navigeter = () => {
     naviget('/')
-    naviget(`Praduct/${id}`)
+    naviget(`/Praduct/${id}`)
   }
 
   return (
