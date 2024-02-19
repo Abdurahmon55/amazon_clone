@@ -9,7 +9,7 @@ import Shop from '../components/Shop'
 import useAddToCard from '../hooks/useAddToCard'
 import useFetch from '../hooks/useFetch'
 import { selectAuth } from '../redux/authSlice'
-import { getNumber, itemCount } from '../redux/countSilce'
+import { itemCount } from '../redux/countSilce'
 
 function ShopCard() {
     const [books] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
@@ -71,7 +71,10 @@ function ShopCard() {
                                     <p className='text-xs text-slate-400 '>Llenajn Paperback</p>
                                     <span className='text-red-500'>${item.price}</span>
                                     <br />
-                                    <button onClick={() => addCard(item.id)} className='px-2 text-xs hover:bg-amber-300 bg-amber-400 text-center rounded-md'>add to Card</button>
+                                    <form onSubmit={() => addCard(item.id)}>
+                                        <button  className='px-2 text-xs hover:bg-amber-300 bg-amber-400 text-center rounded-md'>add to Card</button>
+                                    </form>
+                                    
                                 </div>
                             </div>
                         ))}

@@ -15,7 +15,7 @@ function Modal() {
       <div className='absolute top-5 right-16 w-full h-full z-50'>
         <div className='bg-slate-800 w-80 flex gap-4 pl-4 text-2xl'>
           <h2>hello :</h2>
-          <h2 className='hover:text-blue-800 cursor-pointer'>{auth.username}</h2>
+          <h2 className='hover:text-blue-800 cursor-pointer'>{auth && auth.username}</h2>
         </div>
         <ul className='bg-white w-80 p-4 border-2 border-slate-800 shadow-2xl'>
           {catigore && catigore.map((item) => (

@@ -67,7 +67,7 @@ function Navbar() {
               <span to='Register/' className='sm:text-xs sm:font-thin'>Hello, sing in</span>
               <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
             </Link> : <Link to='Login/'>
-              <span className='sm:text-xs sm:font-thin'>{auth.username}</span>
+              <span className='sm:text-xs sm:font-thin'>{auth && auth.username}</span>
               <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>Account & Lists</h6>
             </Link>}
           </li>
