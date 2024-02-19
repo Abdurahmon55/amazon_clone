@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 # Create your models here.
 class Profile(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Category(models.Model):
     name=models.CharField(max_length=100)
@@ -20,7 +21,7 @@ class Product(models.Model):
     brand=models.CharField(max_length=100, blank=True)
     star=models.PositiveIntegerField(blank=True)
     Category=models.ManyToManyField(Category, blank=True)
-    user=models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user=models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self) :
         return self.name

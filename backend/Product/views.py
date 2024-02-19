@@ -28,6 +28,11 @@ class ProductAddViews(ListCreateAPIView):
     queryset=Product.objects.all()
     serializer_class=ProductSerializer
 
+class ProductUpdeteViews(RetrieveUpdateDestroyAPIView):
+    permission_classes =[IsAuthenticatedOrReadOnly]
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
+
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)
 CatigoryViews=GetObject('CatigoryViews', Category, ListAPIView, CatigorySerializer)

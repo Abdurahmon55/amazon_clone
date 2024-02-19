@@ -12,4 +12,5 @@ urlpatterns = [
     path('shoper/', ShoperViews.as_view()),
     path('shoper/<int:pk>/', ShoperDetalViews.as_view()),
     path('product/add/', ProductAddViews.as_view()),
+    path('product/add/<int:pk>/', ProductUpdeteViews.as_view())
 ]
