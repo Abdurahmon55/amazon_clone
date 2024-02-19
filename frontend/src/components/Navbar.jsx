@@ -4,10 +4,12 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import useForm from '../hooks/useForm'
 import useToggol from '../hooks/useToggol'
 import logo from '../image/pngimg.png'
 import { getAuth, selectAuth } from '../redux/authSlice'
 import { selectItem } from '../redux/countSilce'
+import SearchItem from './SearchItem'
 
 function Navbar() {
 
@@ -15,7 +17,7 @@ function Navbar() {
   const item = useSelector(selectItem)
   const dispatch = useDispatch()
 
-  const [toggol, setToggol]=useToggol()
+  const [toggol, setToggol] = useToggol()
   const [data, setData] = useState()
 
   const getUser = () => {
@@ -30,6 +32,24 @@ function Navbar() {
     dispatch(getAuth(data))
   }, [])
 
+  const [change, setChange] = useState()
+  const [value, setValue]=useState()
+
+  useEffect(() => {
+      const serachSubmit = async () => {
+          console.log(change ? change : null)
+          try {
+              await axios.get(`http://127.0.0.1:8000/api/v1/product/views/?search=${change ? change : null}`)
+                  .then(res => setValue(res.data))
+                  .catch(err => console.log(err))
+          }
+          catch {
+              console.log('hato');
+          }
+      }
+      serachSubmit()
+  }, [change])
+  console.log(value);
 
   return (
     <div className=' bg-slate-900 text-white  flex items-center justify-between px-2'>
@@ -48,14 +68,9 @@ function Navbar() {
           </li>
         </ul>
       </div>
-      <div className='flex items-center flex-grow'>
-        <div className='bg-gray-600 flex items-center  rounded-l-lg sm:p-2 '>
-          <span className='sm:text-xs sm:font-thin'>All</span>
-          <i><ion-icon name="arrow-dropdown"></ion-icon></i>
-        </div>
-        <input className=' flex-grow sm:p-2' type="text" placeholder='search ' />
-        <i className='text-black cursor-pointer sm:text-2xl text-base bg-orange-300 rounded-r-lg sm:p-1'><ion-icon name="search"></ion-icon></i>
+      <div> 
       </div>
+      <SearchItem value={value}/>
       <div >
         <ul className={`info md:gap-5  md:flex md:items-center md:static p-2 rounded-b-lg absolute bg-zinc-900 ${toggol ? 'right-0 top-10' : 'right-[-200px]'} top-16 z-30`}>
           <li className='cursor-pointer flex hover:bg-slate-700 px-1 rounded-lg items-end'>
