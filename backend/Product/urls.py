@@ -11,4 +11,5 @@ urlpatterns = [
     path('user/', UserViews.as_view()),
     path('shoper/', ShoperViews.as_view()),
     path('shoper/<int:pk>/', ShoperDetalViews.as_view()),
+    path('product/add/', ProductAddViews.as_view()),
 ]

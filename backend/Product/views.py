@@ -4,6 +4,8 @@ from .models import *
 from rest_framework.generics import *
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from .permissions import isAuthOrReadOnly
 # Create your views here.
 
 def GetObject (name, model, Views, serializer):
@@ -19,7 +21,12 @@ def filterItem (name, views, model, serializer, filter):
         serializer_class=serializer
         filter_backends = [DjangoFilterBackend]
         filterset_fields = [filter]
-    return name        
+    return name 
+
+class ProductAddViews(ListCreateAPIView):
+    permission_classes =[IsAuthenticatedOrReadOnly]
+    queryset=Product.objects.all()
+    serializer_class=ProductSerializer
 
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)

@@ -17,7 +17,7 @@ function useAddToCard(ItemId) {
             })
         }
         catch {
-            <Link to='/'></Link>
+            naviget('/Login/')
         }
     }
     return [addCard]
