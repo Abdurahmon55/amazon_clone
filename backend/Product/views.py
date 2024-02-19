@@ -5,7 +5,8 @@ from rest_framework.generics import *
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .permissions import isAuthOrReadOnly
+from rest_framework import filters
+
 # Create your views here.
 
 def GetObject (name, model, Views, serializer):
@@ -19,8 +20,9 @@ def filterItem (name, views, model, serializer, filter):
     class name(views):
         queryset=model.objects.all()
         serializer_class=serializer
-        filter_backends = [DjangoFilterBackend]
+        filter_backends = [DjangoFilterBackend, filters.SearchFilter]
         filterset_fields = [filter]
+        search_fields=['name', 'star']
     return name 
 
 class ProductAddViews(ListCreateAPIView):
