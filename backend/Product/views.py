@@ -22,22 +22,18 @@ def filterItem (name, views, model, serializer, filter):
         serializer_class=serializer
         filter_backends = [DjangoFilterBackend, filters.SearchFilter]
         filterset_fields = [filter]
-        search_fields=['name', 'star']
+        search_fields=['name']
     return name 
 
-class ProductAddViews(ListCreateAPIView):
-    permission_classes =[IsAuthenticatedOrReadOnly]
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
 
-class ProductUpdeteViews(RetrieveUpdateDestroyAPIView):
-    permission_classes =[IsAuthenticatedOrReadOnly]
-    queryset=Product.objects.all()
-    serializer_class=ProductSerializer
+def addProductViews(name, views, permission, model, serializer):
+    class name(views):
+        queryset=model.objects.all()
+        serializer_class=serializer
+    return name        
 
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)
-CatigoryViews=GetObject('CatigoryViews', Category, ListAPIView, CatigorySerializer)
 CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, CatigorySerializer)
 NewsProductViews=GetObject('NewsProductViews', NewsProduct, RetrieveAPIView, NewsProductSerializer)
 NewsProductFullViews=GetObject('NewsProductViews', NewsProduct, ListAPIView, NewsProductSerializer)
@@ -45,5 +41,8 @@ ShoperDetalViews=GetObject('ShoperDetalViews', Shoper, RetrieveUpdateDestroyAPIV
 UserViews=filterItem('UserViews', ListAPIView, User, UserSerializer, 'username' )
 ProductViews=filterItem('ProductViews', ListAPIView, Product, ProductSerializer, 'Category')
 ShoperViews=filterItem('ShoperViews', ListCreateAPIView, Shoper, ShoperSerializer, 'shoper' )
-
+ProductAddViews=addProductViews('ProductAddViews', ListCreateAPIView, IsAuthenticatedOrReadOnly, Product, ProductSerializer)
+ProductUpdeteViews=addProductViews('ProductUpdeteViews', RetrieveUpdateDestroyAPIView, IsAuthenticatedOrReadOnly, Product, ProductSerializer)
+ImageAddViews=addProductViews('ImageAddViews', ListCreateAPIView, IsAuthenticatedOrReadOnly, ProductImage, ImgaSerializer )
+CatigoryViews=filterItem('CatigoryViews', ListAPIView, Category, CatigorySerializer, 'name')
 

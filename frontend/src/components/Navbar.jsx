@@ -32,29 +32,12 @@ function Navbar() {
     dispatch(getAuth(data))
   }, [])
 
-  const [change, setChange] = useState()
-  const [value, setValue]=useState()
-
-  useEffect(() => {
-      const serachSubmit = async () => {
-          console.log(change ? change : null)
-          try {
-              await axios.get(`http://127.0.0.1:8000/api/v1/product/views/?search=${change ? change : null}`)
-                  .then(res => setValue(res.data))
-                  .catch(err => console.log(err))
-          }
-          catch {
-              console.log('hato');
-          }
-      }
-      serachSubmit()
-  }, [change])
-  console.log(value);
+  
 
   return (
-    <div className=' bg-slate-900 text-white  flex items-center justify-between px-2'>
-      <div>
-        <ul className='flex gap-5  items-center '>
+    <div className='px-4 bg-slate-900 text-white  grid grid-cols-10 justify-center items-center'>
+      <div className='xl:col-1 lg:col-span-2 md:col-span-2 col-span-3'>
+        <ul className='flex gap-5  items-center'>
           <li className="log">
             <Link to='/'>
               <img className='w-20 cursor-pointer' src={logo} alt="" />
@@ -68,11 +51,11 @@ function Navbar() {
           </li>
         </ul>
       </div>
-      <div> 
+      <div className='lg:col-span-5 md:col-span-4 col-span-6'> 
+        <SearchItem />
       </div>
-      <SearchItem value={value}/>
-      <div >
-        <ul className={`info md:gap-5  md:flex md:items-center md:static p-2 rounded-b-lg absolute bg-zinc-900 ${toggol ? 'right-0 top-10' : 'right-[-200px]'} top-16 z-30`}>
+      <div className=' lg:col-span-3 md:col-span-4 col-span-1'>
+        <ul className={`info md:gap-5  md:flex md:items-center md:justify-between md:static p-2 rounded-b-lg absolute bg-zinc-900 ${toggol ? 'right-0 top-10' : 'right-[-200px]'} top-16 z-30`}>
           <li className='cursor-pointer flex hover:bg-slate-700 px-1 rounded-lg items-end'>
             <h6 className='lg:text-base lg:font-semibold sm:text-sm sm:font-semibold'>EN</h6>
             <ion-icon name="arrow-dropdown"></ion-icon>

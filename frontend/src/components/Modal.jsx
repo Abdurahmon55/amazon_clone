@@ -9,7 +9,6 @@ function Modal() {
   const [catigore] = useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
   const auth = useSelector(selectAuth)
   const naviget = useNavigate()
-  
   return (
     <div className='relative'>
       <div className='absolute top-5 right-16 w-full h-full z-50'>
