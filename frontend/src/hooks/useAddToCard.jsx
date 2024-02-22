@@ -5,6 +5,7 @@ import { selectAuth } from "../redux/authSlice"
 
 function useAddToCard(ItemId) {
     const auth = useSelector(selectAuth)
+    const authId = useSelector(selectAuth)
     const naviget = useNavigate()
     const addCard = async (ItemId) => {
         try {

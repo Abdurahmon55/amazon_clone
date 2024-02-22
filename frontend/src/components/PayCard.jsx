@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectCount, selectItem } from '../redux/countSilce'
 
-function PayCard({ shoper }) {
+function PayCard() {
     const coster = useSelector(selectCount)
     const element = useSelector(selectItem)
     return (

@@ -23,7 +23,7 @@ function SearchItem() {
 
     const getItem = (id) => {
         naviget(`/Praduct/${id}`)
-        setChange(null)
+        setChange( null)
     }
     return (
         <div>
@@ -32,7 +32,7 @@ function SearchItem() {
                     <span className='sm:text-xs sm:font-thin'>All</span>
                     <i><ion-icon name="arrow-dropdown"></ion-icon></i>
                 </div>
-                <input onChange={(e) => setChange(e.target.value)} className=' flex-grow sm:p-2 text-black' type="text" placeholder='search ' />
+                <input onChange={(e) => setChange(e.target.value)}  className=' flex-grow sm:p-2 text-black' type="text" placeholder='search ' />
                 <i onClick={() => setChange(null)} className='text-black cursor-pointer sm:text-2xl text-base bg-orange-300 rounded-r-lg sm:p-1'><ion-icon name="search"></ion-icon></i>
             </div>
             <div className='h relative ' >

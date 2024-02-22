@@ -1,134 +1,44 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import BannerImgae from '../components/BannerImgae'
 import BookCard from '../components/BookCard'
-import Carousel from '../components/Carousel'
+import Carusel from '../components/Carusel'
 import MoveCard from '../components/MoveCard'
-import ProductCard from '../components/ProductCard'
+import Catigore from '../components/Catigore'
 import useCount from '../hooks/useCount'
 import useFetch from '../hooks/useFetch'
-import { selectAuth } from '../redux/authSlice'
+
 
 function Home() {
-  const [showImage, setShowImage] = useState(1)
 
   // useFetch hook  data
-  const [data ] = useFetch(`http://127.0.0.1:8000/api/v1/product/news/${showImage}/`)
-  const [all]= useFetch('http://127.0.0.1:8000/api/v1/product/news/')
-  const [catigory]=useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
-  const [book]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
-  const [move]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=18')
-  const [bestSellerBook]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=22')
-  const [music]=useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=11')
+  const [catigory, errcatigore] = useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
+  const [book, errbook] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=17')
+  const [move, errmove] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=18')
+  const [bestBook, errbestBook] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=22')
+  const [music, errmusic] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=11')
+  const [home, errhome] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=8')
+  const [mouse, errmouse] = useFetch('http://127.0.0.1:8000/api/v1/product/views/?Category=27')
 
-  // function
-  const NextShowImage = () => {
-    if (all && all.length > showImage) {
-      setShowImage(showImage + 1)
-    }
-    else {
-      setShowImage(1)
-    }
-  }
-  const PrevShowImage = () => {
-    if (showImage === 1) {
-      setShowImage(all.length)
-    }
-    else {
-      setShowImage(showImage-1)
-    }
-  }
+  const allArray = mouse && home && [...home, ...mouse]
 
-  // Counter hook carusel
-  const [count, nexts, prev]=useCount(move && move.length-2)
-  const [countBook, getElement, prevElement]=useCount(book && book.length-2)
-  const [bestBook, nextBook, prevBook]=useCount(bestSellerBook && bestSellerBook.length-2)
-  const [musics, nextMusic, prevMusic]=useCount(music && music.length-2)
-
+  
   return (
-    <div className='pr-8'>
-      <div>
-        <div className='button relative z-20 top-10 sm:top-16 md:top-20 lg:top-[150px]'>
-          <button className='n absolute   bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={PrevShowImage}><ion-icon name="arrow-back"></ion-icon></button>
-          <button className='n absolute right-0   bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={NextShowImage}><ion-icon name="arrow-forward"></ion-icon></button>
+    <div className=' mx-4 '>
+           <BannerImgae/>
+        <div className=' grid lg:grid-cols-4 xl:mt-[-300px] lg:mt-[-200px] mt-[-50px] sticky z-50 m-auto gap-4 md:grid-cols-3  grid-cols-2  '>
+          <Catigore data={catigory} start={0} end={8} />
         </div>
-        <div className=''>
-          <ul className='carusel h-[50%] relative flex overflow-hidden'>
-            {data ? <Carousel image={data}/>:'loading'}
-          </ul>
-        </div>
+      <BookCard data={allArray} />
+      <Carusel data={move} title='Most wished for in Movies & TV' error={errmove}/>
+      <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
+        <Catigore data={catigory} start={8} end={12} />
       </div>
-      <div className='lg:top-[-200px] relative p-8 top-[-90px] sm:top-[-120px]'>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2  grid-cols-1'>
-          {catigory && catigory.slice(1,9).map((item)=>(
-            <ProductCard key={item.id}{...item}/>
-          ))}
-        </div>
-        <div className='n relative'>
-          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevElement}><ion-icon name="arrow-back"></ion-icon></button>
-          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={getElement}><ion-icon name="arrow-forward"></ion-icon></button>
-          <div className='mt-4 p-4  bg-white'>
-            <h4 className='font-bold'>Exciting deals
-              <span className='text-xs pl-4 text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'>all deals</span>
-            </h4>
-              <div className=' flex gap-2 overflow-hidden'>
-            {book && book.map((item, index) => (
-              <BookCard key={item.id}{...item} index={index} count={countBook} />
-            ))}
-          </div>
-          </div>
-        </div>
-        <div className='n relative'>
-          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prev}><ion-icon name="arrow-back"></ion-icon></button>
-          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nexts}><ion-icon name="arrow-forward"></ion-icon></button>
-          <div className='mt-4 p-4  bg-white'>
-            <h4 className='font-bold'>Most wished for in Movies & TV</h4>
-              <div className=' flex gap-2 overflow-hidden'>
-            {move && move.map((item, index) => (
-              <MoveCard key={item.id}{...item} index={index} count={count} />
-            ))}
-          </div>
-          </div>
-        </div>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2 grid-cols-1 mt-4  '>
-          {catigory && catigory.slice(9,13).map((item)=>(
-            <ProductCard key={item.id}{...item}/>
-          ))}
-        </div>
-        <div className='n relative'>
-          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevBook}><ion-icon name="arrow-back"></ion-icon></button>
-          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nextBook}><ion-icon name="arrow-forward"></ion-icon></button>
-          <div className='mt-4 p-4  bg-white'>
-            <h4 className='font-bold'>Top Sellers in Books for you</h4>
-              <div className=' flex gap-2 overflow-hidden'>
-            {bestSellerBook && bestSellerBook.map((item, index) => (
-              <MoveCard key={item.id}{...item} index={index} count={bestBook} />
-            ))}
-          </div>
-          </div>
-        </div>
-        <div className='n relative'>
-          <button className='n absolute top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={prevMusic}><ion-icon name="arrow-back"></ion-icon></button>
-          <button className='n absolute right-0 top-24  bg-amber-200 p-2 rounded-lg hover:bg-amber-100' onClick={nextMusic}><ion-icon name="arrow-forward"></ion-icon></button>
-          <div className='mt-4 p-4  bg-white'>
-            <h4 className='font-bold'>Top Sellers in Books for you</h4>
-              <div className=' flex gap-2 overflow-hidden'>
-            {music && music.map((item, index) => (
-              <MoveCard key={item.id}{...item} index={index} count={musics} />
-            ))}
-          </div>
-          </div>
-        </div>
-        <div className=' grid lg:grid-cols-4 m-auto gap-4  md:grid-cols-3  sm:grid-cols-2 grid-cols-1 mt-4  '>
-          {catigory && catigory.slice(15,19).map((item)=>(
-            <ProductCard key={item.id}{...item}/>
-          ))}
-        </div>
+      <Carusel data={music} title='Top Sellers' error={errmusic}/>
+      <Carusel data={book} title='Best Sellers in Books' error={errbook}/>
+      <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
+        <Catigore data={catigory} start={12} end={16} />
       </div>
-      {/* <div className='flex flex-col items-center border-t-2 border-b-2 mb-10 absolute top-[-130px] p-5 w-full'>
-            <span className='text-sm'>See personalized recommendations</span>
-            <Link to='Register/' className='text-center bg-amber-400 w-52 rounded-md shadow-md border-2 border-amber-300 cursor-pointer font-bold'>Sign in</Link>
-            <span className='text-sm'>New customer? <span className='text-sm  text-lime-400 hover:text-red-800 hover:underline  cursor-pointer'> Start here.</span></span>
-        </div> */}
+      <Carusel data={bestBook} title='Top Sellers in Books for you' error={errbestBook} />
     </div>
   )
 }

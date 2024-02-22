@@ -25,6 +25,12 @@ def filterItem (name, views, model, serializer, filter):
         search_fields=['name']
     return name 
 
+class ProductViews(ListAPIView):
+        queryset=Product.objects.all()
+        serializer_class=ProductSerializer
+        filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+        filterset_fields = ['Category']
+        search_fields=['name', 'brand', 'star']
 
 def addProductViews(name, views, permission, model, serializer):
     class name(views):
@@ -35,11 +41,11 @@ def addProductViews(name, views, permission, model, serializer):
 ImageViews=GetObject('ImageViews', ProductImage, ListAPIView, ImgaSerializer)
 ProductDetalViews=GetObject('ProductDetalViews', Product, RetrieveAPIView, ProductSerializer)
 CatigoryDetalViews=GetObject('CatigoryDetalViews', Category, RetrieveAPIView, CatigorySerializer)
+UserDetailViews=GetObject('UserViews',User, RetrieveAPIView,  UserSerializer)
 NewsProductViews=GetObject('NewsProductViews', NewsProduct, RetrieveAPIView, NewsProductSerializer)
 NewsProductFullViews=GetObject('NewsProductViews', NewsProduct, ListAPIView, NewsProductSerializer)
 ShoperDetalViews=GetObject('ShoperDetalViews', Shoper, RetrieveUpdateDestroyAPIView, ShoperSerializer)
 UserViews=filterItem('UserViews', ListAPIView, User, UserSerializer, 'username' )
-ProductViews=filterItem('ProductViews', ListAPIView, Product, ProductSerializer, 'Category')
 ShoperViews=filterItem('ShoperViews', ListCreateAPIView, Shoper, ShoperSerializer, 'shoper' )
 ProductAddViews=addProductViews('ProductAddViews', ListCreateAPIView, IsAuthenticatedOrReadOnly, Product, ProductSerializer)
 ProductUpdeteViews=addProductViews('ProductUpdeteViews', RetrieveUpdateDestroyAPIView, IsAuthenticatedOrReadOnly, Product, ProductSerializer)

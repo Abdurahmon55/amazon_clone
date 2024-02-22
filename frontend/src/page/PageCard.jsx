@@ -1,14 +1,16 @@
 import React from 'react'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Carusel from '../components/Carusel'
 import useAddToCard from '../hooks/useAddToCard'
 import useFetch from '../hooks/useFetch'
 
 function PageCard() {
     const { id } = useParams()
-    const [card] = useFetch(`http://127.0.0.1:8000/api/v1/product/views/${id}/`)
+    const [card, errcard] = useFetch(`http://127.0.0.1:8000/api/v1/product/views/${id}/`)
+    const [similar, errsimilar]=useFetch(`http://127.0.0.1:8000/api/v1/product/views/?Category=${card && card.Category[0]}`)
     const [imageId, setImageId] = useState(0)
-    const [addCard] = useAddToCard()
+    const [addCard] = useAddToCard(id)
     return (
         <div className='mb-36 p-4'>
             <div className='grid grid-cols-5'>
@@ -70,6 +72,9 @@ function PageCard() {
             <div>
                 <span className='font-bold'>Product Description</span>
                 <p>{card && card.desc}</p>
+            </div>
+            <div>
+                <Carusel data={similar} title='Similar' error={errsimilar}/>
             </div>
         </div>
     )

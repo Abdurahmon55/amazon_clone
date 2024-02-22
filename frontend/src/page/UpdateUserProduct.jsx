@@ -17,7 +17,7 @@ function UpdateUserProduct() {
   const [catigoreId, setCatigoreId] = useState()
   const [changCtigore, setChangeCatigore] = useState()
   const [toggol, setToggol] = useState(false)
-  const [product] = useFetch(`http://127.0.0.1:8000/api/v1/product/add/${id}/`)
+  const [product, errproduct] = useFetch(`http://127.0.0.1:8000/api/v1/product/add/${id}/`)
 
   const addImage = async () => {
     const formData = new FormData();
@@ -51,16 +51,6 @@ function UpdateUserProduct() {
         user: shoperId,
         Category: [catigoreId],
       })
-      .then(res=>console.log(res.data))
-      .catch(err=>console.log(err))
-      console.log(change.name);
-      console.log(change.desc);
-      console.log(change.price);
-      console.log(change.stock);
-      console.log(change.brand);
-      console.log(change.shoperId);
-      console.log(catigoreId);
-      console.log(product);
     }
     catch {
       console.log('hato');
@@ -98,8 +88,8 @@ function UpdateUserProduct() {
         <h2 className='text-center sm:text-2xl'>Updated your product</h2>
         <span className='text-xs text-slate-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea reiciendis laborum possimus est modi dignissimos reprehenderit </span>
       </div>
-      <div className='grid grid-cols-2 mx-10 gap-4'>
-        <div>
+      <div className='grid lg:grid-cols-3  mx-10 gap-4'>
+        <div className='col col-span-1'>
           <h2>Add Image in Praduct</h2>
           <div className='my-4'>
             <form onSubmit={addImage} className=' bg-white p-4 w-80' action="">
@@ -139,14 +129,14 @@ function UpdateUserProduct() {
             </form>
           </div>
         </div>
-        <div>
+        <div className='col-span-2'>
           <h2>Product Detail</h2>
           <div className='p-4 mt-4 bg-white rounded-lg'>
             <div className=' flex gap-4'>
-              <img className='w-80' src={product && product.image[0].images} alt="" />
+              <img className='md:w-80 w-52 h-52' src={product && product.image[0].images} alt="" />
               <div>
                 <h2>name : <span className='text-lg font-semibold'>{product && product.name}</span></h2>
-                <p>desc{product && product.desc}</p>
+                <p className='h-80 overflow-y-scroll'>desc{product && product.desc}</p>
               </div>
             </div>
             <div className='flex gap-4 mt-4'>

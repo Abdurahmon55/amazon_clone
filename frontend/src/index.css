@@ -15,7 +15,3 @@ body{
    
 }
 
-.image{
-    max-width: 100%;
-    mask-image: linear-gradient(to bottom, #000000 50%, transparent 100%);
-}

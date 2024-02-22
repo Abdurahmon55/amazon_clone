@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import useFetch from '../hooks/useFetch'
 import useScore from '../hooks/useScore'
 import { getNumber } from '../redux/countSilce'
 
@@ -55,12 +54,12 @@ function Shop({ product, id, shoper, number }) {
         naviget(`/Praduct/${cards && cards.id}`)
     }
     return (
-        <div className='grid grid-cols-5 py-4 pl-4 gap-4'>
-            <div className='col-span-1 w-24'>
+        <div className='grid md:grid-cols-5 py-4 pl-4 gap-4'>
+            <div className='md:col-span-1 w-24'>
                 <img src={cards && cards.image[0].images} alt="" />
                 <span className='font-bold'>${cards && cards.price}</span>
             </div>
-            <div className='col-span-3'>
+            <div className='md:col-span-3'>
                 <div className='h-10 text-sm overflow-hidden'>
                     <span className=' font-semibold'>{cards && cards.name}</span>
                 </div>

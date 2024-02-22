@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { ProductSell } from '../components/sell/data'
 import useFetch from '../hooks/useFetch'
 import useForm from '../hooks/useForm'
 import { selectAuth} from '../redux/authSlice'
 import banner from '../image/homepage-hero-image-03-sm.png'
 import { useNavigate } from 'react-router-dom'
+import { setTitle } from '../redux/countSilce'
 
 function Sell() {
     const [change, setChange] = useForm()
@@ -17,6 +18,7 @@ function Sell() {
     const auth = useSelector(selectAuth)
     const [catigoreId, setCatigoreId] = useState()
     const naviget = useNavigate()
+    const dispatch=useDispatch()
 
     const handelSubmit = async (e) => {
         try {
@@ -73,9 +75,12 @@ function Sell() {
         setToggol(false)
     }
 
-    const [product] = useFetch('http://127.0.0.1:8000/api/v1/product/views/')
+    const [product, errproduct] = useFetch('http://127.0.0.1:8000/api/v1/product/views/')
     const userProduct = product && product.filter((item) => item.user === 10)
 
+    const getBrand=(data)=>{
+        naviget(`/resault/${data}`)
+    }
     return (
         <div>
             <div className='grid grid-cols-2'>
@@ -128,7 +133,7 @@ function Sell() {
                         {userProduct && userProduct.map((item) => (
                             <div key={item.id} className='n w-48 bg-blue-100 p-2 rounded-lg'>
                                 <img className='' src={item.image[0].images} alt="" />
-                                <span className='text-xs'>brand: <span className='text-blue-500 cursor-pointer hover:text-red-500'>{item.brand} </span>  ${item.price}</span>
+                                <span onClick={()=>getBrand(item.brand)} className='text-xs'>brand: <span className='text-blue-500 cursor-pointer hover:text-red-500'>{item.brand} </span>  ${item.price}</span>
                                 <br />
                                 <span>name: <span className='text-blue-500 cursor-pointer hover:text-red-500' onClick={()=>naviget(`/updated/${item.id}/`)}>{item.name}</span></span>
                             </div>

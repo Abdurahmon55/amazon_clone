@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Modal() {
 
-  const [catigore] = useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
+  const [catigore, errcatigory] = useFetch('http://127.0.0.1:8000/api/v1/product/catigory/')
   const auth = useSelector(selectAuth)
   const naviget = useNavigate()
   return (

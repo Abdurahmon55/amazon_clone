@@ -1,16 +1,19 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import useFetch from '../../hooks/useFetch'
 import { Brands, CustomerReviews, Price } from './filterData'
 
 function Sidebar() {
+  const naviget = useNavigate()
   return (
     <div >
         <div className='Reviews'>
           <h2 className='font-bold pb-4'>Customer Reviews</h2>
           {CustomerReviews.map((item)=>(
             <div key={item.id}>{[...Array(item.star)].map((item)=>(
-              <i className='text-orange-400'><ion-icon name="star"></ion-icon></i>
+              <i  className='text-orange-400'><ion-icon name="star"></ion-icon></i>
             ))}
-            <span className=' pl-2 cursor-pointer hover:text-red-400'>& up</span>
+            <span onClick={()=>naviget(`/resault/${item.star}`)}  className=' pl-2 cursor-pointer hover:text-red-400'>& up</span>
             </div>
           ))}
         </div>
@@ -19,7 +22,7 @@ function Sidebar() {
           {Brands.map((item)=>(
             <div key={item.id} className='flex gap-2 cursor-pointer'>
               <div className='h-5 w-5 border-4 mb-2 shadow-lg rounded-sm hover:border-cyan-500'></div>
-              <span className='text-sm hover:text-red-400'>{item.name}</span>
+              <span onClick={()=>naviget(`/resault/${item.name}`)} className='text-sm hover:text-red-400'>{item.name}</span>
             </div>
           ))}
         </div>

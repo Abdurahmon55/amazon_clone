@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function CardsResults({ name, image, price, stock, desc, id }) {
+function CardsResults({ name, image, price, id }) {
   const naviget = useNavigate()
 
   const navigeter = () => {

@@ -6,11 +6,11 @@ export const CustomerReviews=[
 ]
 
 export const Brands=[
-    {name:'BIC', id:1},
-    {name:'Paper Mate', id:2},
-    {name:'SHARPIE', id:3},
-    {name:'Elmer', id:4},
-    {name:'Crayola', id:5},
+    {name:'SAMSUNG', id:1},
+    {name:'Ceramic', id:2},
+    {name:'Plastic', id:3},
+    {name:'ASUS', id:4},
+    {name:'RAZER', id:5},
 ]
 
 export const Price=[

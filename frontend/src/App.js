@@ -10,8 +10,9 @@ import Login from './page/Login'
 import ShopCard from './page/ShopCard'
 import Register from './page/Register'
 import Sell from './page/Sell'
-import Personal from './page/Personal'
 import UpdateUserProduct from './page/UpdateUserProduct'
+import TopSell from './page/TopSell'
+import ResultsPage from './page/ResultsPage'
 
 function App() {
   return (
@@ -21,12 +22,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='Category/:id' element={<Results/>}/>
+        <Route path='resault/:brand' element={<ResultsPage/>}/>
         <Route path='Praduct/:id' element={<PageCard/>}/>
         <Route path='Login/' element={<Login/>}/>
         <Route path='Register/' element={<Register/>}/>
         <Route path='shopCard/' element={<ShopCard/>}/>
         <Route path='sell/' element={<Sell/>}/>
-        <Route path='personal/' element={<Personal/>}/>
+        <Route path='top/sell/' element={<TopSell/>}/>
         <Route path='updated/:id/' element={<UpdateUserProduct/>}/>
       </Routes>
       <Footer />

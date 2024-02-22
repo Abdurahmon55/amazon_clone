@@ -4,10 +4,9 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import useForm from '../hooks/useForm'
 import useToggol from '../hooks/useToggol'
 import logo from '../image/pngimg.png'
-import { getAuth, selectAuth } from '../redux/authSlice'
+import { getAuth,  selectAuth, selectAuthId } from '../redux/authSlice'
 import { selectItem } from '../redux/countSilce'
 import SearchItem from './SearchItem'
 
@@ -15,6 +14,8 @@ function Navbar() {
 
   const auth = useSelector(selectAuth)
   const item = useSelector(selectItem)
+
+  
   const dispatch = useDispatch()
 
   const [toggol, setToggol] = useToggol()
@@ -27,10 +28,12 @@ function Navbar() {
     console.log(data && data);
   }
 
+
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem('user'))
     dispatch(getAuth(data))
   }, [])
+
 
   
 

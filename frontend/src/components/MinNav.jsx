@@ -28,9 +28,11 @@ function MinNav() {
                       <Modal/>  
                     </div>
                 </li>
+                <Link to='top/sell/'>
                 <li className='hover:border rounded-sm px-2   cursor-pointer md:text-base text-xs'>
                     <span>Today's Deals</span>
                 </li>
+                </Link>
                 <li className='hover:border rounded-sm px-2  cursor-pointer md:text-base text-xs'>
                     <span>Custeimer Service</span>
                 </li>
